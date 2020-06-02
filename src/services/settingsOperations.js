@@ -1,15 +1,14 @@
-import localStorage from 'local-storage';
-const settingsKey = 'settings';
+import localStorage from "local-storage";
+const settingsKey = "settings";
 
-export function setLocalSettings(settings){
-    localStorage.set(settingsKey, settings);
+export function setLocalSettings(settings) {
+  localStorage.set(settingsKey, settings);
 }
 
-export function getLocalSettings(){
-    return localStorage.get(settingsKey);
-
+export function getLocalSettings() {
+  return localStorage.get(settingsKey);
 }
 
-export function clearLocalSettings(){
-    localStorage.remove(settingsKey);
+export function clearLocalSettings() {
+  localStorage.remove(settingsKey);
 }

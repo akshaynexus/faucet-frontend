@@ -3,14 +3,15 @@ Thanks to [Material-UI](https://github.com/mui-org/material-ui) for great, fully
 This template comes with ready to use [Redux](https://github.com/reduxjs/redux), [React Router](https://github.com/ReactTraining/react-router), [local-storage](https://github.com/bevacqua/local-storage) and more!
 
 To run on localhost:
+
 ```
 cd material-ui-starter
 npm install
 npm start
- ```
-
+```
 
 ---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -5,10 +5,10 @@ export const TEST = "TEST";
 
 // Test Setter
 export function setTest(test) {
-    return dispatch => {
-        dispatch({
-            type: TEST,
-            payload: test
-        })
-    };
+  return (dispatch) => {
+    dispatch({
+      type: TEST,
+      payload: test,
+    });
+  };
 }
