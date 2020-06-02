@@ -8,6 +8,7 @@
     "@material-ui/lab": "^4.0.0-alpha.54",
     "@material-ui/styles": "^4.10.0",
     "local-storage": "^2.0.0",
+    "notistack": "^0.9.16",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",

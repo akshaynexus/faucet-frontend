@@ -18,6 +18,7 @@ import SettingsPage from "./components/pages/SettingsPage";
 
 // Action Imports
 import { setSettings } from "./actions/settings-actions";
+import { SnackbarProvider } from "notistack";
 
 // Local Storage Operations
 import {
@@ -40,28 +41,33 @@ class App extends Component {
     const theme = createMuiTheme(this.props.settings);
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <Router>
-          <AppBar />
-          <Switch>
-            <Route path={"/"} exact /*strict*/ component={HomePage} />
-            <Route path={"/test"} exact /*strict*/ component={TestPage} />
-            <Route
-              path={"/settings"}
-              exact
-              /*strict*/ component={SettingsPage}
-            />
-            <Route exact /*strict*/ component={NoPageFound} />
-          </Switch>
-        </Router>
-      </MuiThemeProvider>
+      <SnackbarProvider maxSnack={3}>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <Router>
+            <AppBar />
+            <Switch>
+              <Route path={"/"} exact /*strict*/ component={HomePage} />
+              <Route path={"/test"} exact /*strict*/ component={TestPage} />
+              <Route
+                path={"/settings"}
+                exact /*strict*/
+                component={SettingsPage}
+              />
+              <Route exact /*strict*/ component={NoPageFound} />
+            </Switch>
+          </Router>
+        </MuiThemeProvider>
+      </SnackbarProvider>
     );
   }
 }
 
 const mapStateToProps = (state, props) => {
-  return { ...state, ...props };
+  return {
+    ...state,
+    ...props,
+  };
 };
 
 const mapDispatchToProps = {
