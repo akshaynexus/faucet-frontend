@@ -19,13 +19,57 @@ class HomePage extends Component {
     super(props);
     this.state = {
       data: null,
+      faucetbackend: "http://155.138.137.219:3333",
+      address: "",
+      txdata: [],
     };
   }
   componentDidMount() {
-    fetch("http://192.168.8.112:8081/stats")
+    fetch(this.state.faucetbackend)
       .then((response) => response.json())
       .then((data) => this.setState({ data }));
   }
+
+  addrChangeHandle = (addr) => {
+    this.setState({ address: addr.target.value });
+  };
+  showMessage = (msg, type) => {
+    this.props.enqueueSnackbar(msg, {
+      variant: type,
+    });
+  };
+
+  sendTestnetCoins = () => {
+    if (this.state.address === "")
+      this.showMessage("Enter Ghost address", "error");
+    else {
+      const formData = new FormData();
+      formData.append("address", this.state.address);
+      // POST request using fetch inside useEffect React hook
+      const requestOptions = {
+        method: "POST",
+        body: formData,
+      };
+      fetch(`${this.state.faucetbackend}/send`, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          this.processSendResponse(data);
+        });
+    }
+  };
+  processSendResponse = (response) => {
+    if (response.error !== "") {
+      this.showMessage(response.error, "error");
+    } else {
+      this.showMessage(`Sent ${response.sentamt} GHOST`, "success");
+      this.setState({
+        txdata: [
+          ...this.state.txdata,
+          { txid: response.txid, amt: response.sentamt },
+        ],
+      }); //simple value
+    }
+  };
   render() {
     return (
       <div>
@@ -73,6 +117,7 @@ class HomePage extends Component {
               id="ghostaddress"
               label="Address"
               ref="ghostaddress"
+              onChange={this.addrChangeHandle}
               m={0.5}
               style={{
                 width: "50%",
@@ -86,10 +131,29 @@ class HomePage extends Component {
                 width: "40%",
                 marginBottom: "20px",
               }}
+              onClick={() => {
+                this.sendTestnetCoins();
+              }}
             >
               <NavigationIcon />
               Send Coins
             </Fab>
+            <Card>
+              <CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Recent TXes
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {JSON.stringify(this.state.txdata, null, 1)}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
           </Grid>
         </Grid>
       </div>

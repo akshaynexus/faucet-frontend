@@ -5,9 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
-
-import { Link } from "react-router-dom";
-
 import TemporaryDrawer from "./TemporaryDrawer";
 
 const styles = (theme) => ({
@@ -56,9 +53,7 @@ class AppBar extends Component {
             </IconButton>
 
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              <Link to={"/"} style={{ all: "unset" }}>
-                {"Ghost Testnet Faucet"}
-              </Link>
+              {"Ghost Testnet Faucet"}
             </Typography>
           </Toolbar>
         </AppBarMUI>

@@ -41,11 +41,18 @@ class App extends Component {
     const theme = createMuiTheme(this.props.settings);
 
     return (
-      <SnackbarProvider maxSnack={3}>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          <Router>
-            <AppBar />
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <AppBar />
+          <SnackbarProvider
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+              width: "100%",
+            }}
+            maxSnack={3}
+          >
             <Switch>
               <Route path={"/"} exact /*strict*/ component={HomePage} />
               <Route path={"/test"} exact /*strict*/ component={TestPage} />
@@ -56,9 +63,9 @@ class App extends Component {
               />
               <Route exact /*strict*/ component={NoPageFound} />
             </Switch>
-          </Router>
-        </MuiThemeProvider>
-      </SnackbarProvider>
+          </SnackbarProvider>
+        </Router>
+      </MuiThemeProvider>
     );
   }
 }
